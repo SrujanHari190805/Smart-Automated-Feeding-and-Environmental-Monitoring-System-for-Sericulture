@@ -56,13 +56,13 @@ The system uses a **three-controller layered architecture**:
 └─────────────────────────────────────────────────────────┘
 ```
 <p align="center">
-  <img src="images/block_diagram.png" width="600"/>
+  <img src="images/block_diagram.png" width="400"/>
   <br>
    Block diagram illustrating Raspberry Pi vision processing, Arduino CNC control, ESP32 environmental monitoring, and IoT cloud integration.
 </p>
 
 <p align="center">
-  <img src="images/flowchart.png" width="400"/>
+  <img src="images/flowchart.png" width="200"/>
   <br>
    System workflow showing image capture, leaf detection, automated dispensing, environmental monitoring, and cloud reporting sequence.
 </p>
@@ -99,13 +99,13 @@ The system uses a **three-controller layered architecture**:
 
 ---
 <p align="center">
-  <img src="images/mcu.jpg" width="500"/>
+  <img src="images/mcu.jpg" width="300"/>
   <br>
    Microcontroller integration setup containing Raspberry Pi, Arduino Uno, and CNC shield
 </p>
 
 <p align="center">
-  <img src="images/dispenser.jpg" width="500"/>
+  <img src="images/dispenser.jpg" width="300"/>
   <br>
    Dispensing mechanism used for automated and precise silkworm feeding.
 </p>
