@@ -121,9 +121,9 @@ Patent application in progress for the **novel CNC-driven feeding mechanism with
 
 ## 👥 Team — Spatika
 
-| Name | Contact | Department |
-|---|---|---|
-| Tarun Patil | 8431413296 | ECE, BMSIT&M |
-| Sri Srujan Hari T | 9900960468 | ECE, BMSIT&M |
-| Nitish K S | 8073251956 | ECE, BMSIT&M |
-| Harshitha K V | 9980174654 | ECE, BMSIT&M |
+| Name | 
+|---|
+| Tarun Patil | 
+| Sri Srujan Hari T | 
+| Nitish K S | 
+| Harshitha K V | 
