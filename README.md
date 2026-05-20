@@ -121,7 +121,7 @@ Patent application in progress for the **novel CNC-driven feeding mechanism with
 
 ## 👥 Team — Spatika
 
-| Sri Srujan Hari T | 
-| Tarun Patil | 
-| Nitish K S | 
+| Sri Srujan Hari T |
+| Tarun Patil |
+| Nitish K S |
 | Harshitha K V | 
