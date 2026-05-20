@@ -118,10 +118,5 @@ The system uses a **three-controller layered architecture**:
 Patent application in progress for the **novel CNC-driven feeding mechanism with environmental feedback loop**.
 
 ---
-
-## 👥 Team — Spatika
-
-| Sri Srujan Hari T |
-| Tarun Patil |
-| Nitish K S |
-| Harshitha K V | 
+👥 Team — Spatika
+NameContactDepartmentTarun Patil8431413296ECE, BMSIT&MSri Srujan Hari T9900960468ECE, BMSIT&MNitish K S8073251956ECE, BMSIT&MHarshitha K V9980174654ECE, BMSIT&M
