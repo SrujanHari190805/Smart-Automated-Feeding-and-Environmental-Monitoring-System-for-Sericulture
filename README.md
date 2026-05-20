@@ -14,6 +14,20 @@ Traditional silkworm farming (sericulture) requires manual feeding of mulberry l
 
 ---
 
+## 🖼️ Suggested Media to Add
+
+| What to Add | Where to Get It |
+|---|---|
+| Full prototype photo (the CNC feeder setup) | Already have (Fig 3 from project report) |
+| Main control unit photo | Already have (Fig 4 from project report) |
+| Dispenser and environmental monitoring unit photo | Already have (Fig 5 from project report) |
+| Block diagram of layered architecture | Already have (Fig 2 from project report) |
+| System flowchart | Already have (Fig 1 from project report) |
+| Blynk dashboard screenshot | Capture from your phone |
+| Camera feed screenshot showing leaf detection | Capture during operation |
+| Short demo video (GIF or MP4) | Record the CNC dispensing a feeding cycle |
+
+---
 
 ## ✨ Key Features
 
@@ -121,8 +135,9 @@ Patent application in progress for the **novel CNC-driven feeding mechanism with
 
 ## 👥 Team — Spatika
 
+| Name |
 |---|---|---|
 | Sri Srujan Hari T |
-| Tarun Patil |
-| Nitish K S |
-| Harshitha K V |
+| Tarun Patil | 
+| Nitish K S | 
+| Harshitha K V | 
