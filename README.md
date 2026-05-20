@@ -1,120 +1,129 @@
-# 🐛 Smart Automated Feeding & Environmental Monitoring System for Sericulture
+# Smart Automated Feeding & Environmental Monitoring System for Sericulture
 
-> **Patent Application In Progress**
+> A CNC-controlled, image-processing-driven automated feeding system for silkworm rearing, integrated with IoT environmental monitoring and cloud connectivity. Patent application in progress.
 
-An automated sericulture management system that eliminates manual intervention in silkworm feeding cycles through multi-parameter environmental sensing, image-assisted monitoring, and microcontroller-based closed-loop control.
-
----
-
-## 📌 Problem Statement
-
-Traditional sericulture (silk farming) relies entirely on manual feeding and environmental monitoring — a labor-intensive, error-prone process. Silkworms are highly sensitive to environmental conditions; even small deviations in temperature, humidity, or CO₂ levels can significantly reduce cocoon yield and silk quality.
+![Status](https://img.shields.io/badge/Status-Active%20%7C%20Patent%20Pending-orange)
+![Team](https://img.shields.io/badge/Team-Spatika-blueviolet)
+![Platform](https://img.shields.io/badge/Platform-Raspberry%20Pi%20%7C%20Arduino%20%7C%20ESP32-green)
 
 ---
 
-## 💡 Solution
+## 🐛 Problem Statement
 
-An intelligent, automated system that monitors the sericulture environment in real time, uses image-assisted monitoring to assess feeding status, and autonomously regulates feeding schedules and environmental conditions — maintaining consistent, optimal habitat quality for silkworms without human intervention.
+Traditional silkworm farming (sericulture) requires manual feeding of mulberry leaves multiple times per day. Over-feeding wastes expensive leaves, while under-feeding stunts silkworm growth. Environmental factors like temperature and humidity also directly impact silk yield, but are rarely monitored continuously. This project automates both feeding and environmental control, eliminating manual intervention entirely.
+
+---
+
+
+## ✨ Key Features
+
+- **Image-based feeding trigger**: Raspberry Pi camera captures the feeding tray; feeding only occurs when leaf quantity drops below threshold
+- **CNC-controlled leaf dispensing**: G-code-driven stepper motor mechanism delivers precise leaf portions — no wasted leaves
+- **Peltier-based leaf preservation**: Keeps stored mulberry leaves fresh by maintaining a cool, controlled storage environment
+- **Environmental monitoring**: DHT11 sensor tracks temperature and humidity in the rearing chamber; actuates heater, cooler, and humidifier as needed
+- **IoT cloud connectivity**: ESP32 + Blynk enables remote monitoring, real-time alerts, and manual override from any mobile device
+- **Solar-powered**: Ensures uninterrupted operation in farm settings without stable grid power
 
 ---
 
 ## 🏗️ System Architecture
 
+The system uses a **three-controller layered architecture**:
+
 ```
-[Environmental Sensors]
-   ├── Temperature Sensor
-   ├── Humidity Sensor
-   └── CO₂ Sensor
-         │
-[Image Capture Module]
-   └── Camera (leaf coverage / feeding status)
-         │
-   [ESP32 Microcontroller]
-         │
-   ├── Real-time sensor data processing
-   ├── Image-assisted feeding status evaluation
-   ├── Automated feeding mechanism control
-   └── Environmental regulation (fan, heater, humidifier)
-         │
-   [Actuators]
-   ├── Automated Feeding Mechanism (novel design)
-   ├── Ventilation / Fan Control
-   └── Humidity Regulation
+┌─────────────────────────────────────────────────────────┐
+│                    LAYER 1: VISION & DECISION            │
+│         Raspberry Pi 4 — Image Processing + Control      │
+│   Camera Module → OpenCV leaf detection → Feed decision  │
+└──────────────────────────┬──────────────────────────────┘
+                           │ Serial / GPIO
+┌──────────────────────────▼──────────────────────────────┐
+│                   LAYER 2: MOTION CONTROL                │
+│         Arduino + CNC Shield — Stepper Motor Control     │
+│   Receives G-code from Pi → Drives X-Y feeder mechanism  │
+└──────────────────────────┬──────────────────────────────┘
+                           │
+┌──────────────────────────▼──────────────────────────────┐
+│               LAYER 3: ENVIRONMENT & IoT                 │
+│     ESP32 — DHT11 sensing + Peltier control + Blynk      │
+│   Monitors temp/humidity → actuates cooling/heating      │
+│   Sends telemetry to cloud → Receives remote commands    │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## ⚙️ Hardware Stack
+## 🔧 Hardware Components
 
 | Component | Purpose |
 |---|---|
-| ESP32 | Main microcontroller |
-| DHT22 / SHT31 | Temperature & humidity sensing |
-| MH-Z19 CO₂ Sensor | Carbon dioxide monitoring |
-| Camera Module (OV2640) | Image-assisted leaf coverage monitoring |
-| Servo / Stepper Motor | Automated feeding mechanism actuation |
-| Relay Module | Fan, heater, humidifier control |
+| Raspberry Pi 4 | Central controller: image processing and feeding decisions |
+| Arduino Uno | CNC shield driver: controls stepper motors for feeder |
+| ESP32 | Environmental sensing, Peltier control, cloud connectivity |
+| CNC Shield + NEMA Stepper Motors | XY-axis leaf dispensing mechanism |
+| Camera Module | Captures feeding tray for leaf quantity detection |
+| DHT11 Sensor | Monitors temperature and humidity in rearing chamber |
+| Peltier Module + Heat Sink + Fan | Leaf preservation cooling unit |
+| Relay Module | Automated switching for heater, cooler, humidifier |
+| Blynk Cloud | IoT platform for remote monitoring and manual override |
+| Joystick | Manual override for local control |
+| Solar Panel + BMS | Renewable power source for off-grid operation |
 
 ---
 
-## 💻 Firmware Overview
+## ⚙️ How It Works (Step by Step)
 
-- **Language:** Embedded C (ESP32)
-- Real-time multi-sensor data acquisition
-- Threshold-based environmental regulation loop
-- Image capture and basic processing for feeding status detection
-- Automated feeding trigger based on time + visual cues
-- Logging and alert system
-
----
-
-## 🌱 Environmental Control Loop
-
-```
-Sense (Temp / Humidity / CO₂)
-        ↓
-Compare against optimal thresholds
-        ↓
-Actuate (Fan / Heater / Humidifier)
-        ↓
-Re-sense → Closed feedback loop
-```
+1. **Capture** — Raspberry Pi camera takes an image of the silkworm feeding tray at regular intervals.
+2. **Detect** — OpenCV processes the image to estimate remaining leaf quantity.
+3. **Decide** — If leaves are below threshold, Raspberry Pi triggers a feeding cycle.
+4. **Dispense** — Arduino drives the CNC stepper motors to deliver a measured portion of mulberry leaves.
+5. **Preserve** — ESP32 monitors the leaf storage unit and maintains the Peltier cooling system to keep leaves fresh.
+6. **Monitor** — ESP32 reads DHT11 temperature and humidity, actuates environmental controls to keep the rearing chamber optimal.
+7. **Report** — All data is streamed to Blynk cloud; alerts are sent if parameters go out of range.
+8. **Override** — User can manually control feeding or environmental systems via the Blynk app or the onboard joystick.
 
 ---
 
-## 🍃 Automated Feeding Mechanism
+## 📊 Results
 
-A novel mechanised feeding design (patent pending) that:
-- Dispenses fresh mulberry leaves on a programmed schedule
-- Adjusts quantity based on silkworm growth stage
-- Uses image-based feedback to verify leaf coverage
-- Eliminates the need for manual feeding intervention
-
-> ⚠️ **Note:** Specific mechanical design details are withheld pending patent filing.
+- ✅ Successfully automated full feeding cycles with camera-triggered dispensing
+- ✅ Environmental parameters accurately monitored and maintained in real-time
+- ✅ Peltier system effectively preserved leaf freshness in storage unit
+- ✅ Cloud telemetry consistently transmitted to Blynk dashboard
+- ✅ Improved resource efficiency and significantly reduced manual intervention
 
 ---
 
-## 📊 Key Outcomes
+## 🔮 Future Scope
 
-- Eliminated manual intervention in feeding cycles
-- Maintained consistent habitat quality across rearing cycles
-- Novel automated feeding mechanism validated through testing
-- Patent application filed for the feeding mechanism design
-
----
-
-## 🚧 Status
-
-- [x] System designed and prototyped
-- [x] Environmental monitoring validated
-- [x] Automated feeding mechanism tested
-- [x] Patent application in progress (2024–Present)
-- [ ] Field deployment at sericulture farm (upcoming)
+- AI-based silkworm health and disease detection using computer vision
+- Advanced instar-stage recognition to adjust leaf quantity per growth phase
+- Large-scale cloud dashboard with multi-farm monitoring
+- Integration with predictive models for silk yield estimation
+- Adaptable for other agricultural automation applications (poultry, aquaculture)
 
 ---
 
-## 👤 Author
+## ⚠️ Known Limitations
 
-**Sri Srujan Hari T**
-B.E – Electronics & Communication Engineering, BMSIT&M
-[LinkedIn](https://www.linkedin.com/in/srujan-hari-undefined-1a7364399) | thammineedisrujanhari@gmail.com
+- Initial hardware setup cost is relatively high for small farmers
+- Requires stable internet connection for cloud features
+- Image processing accuracy depends on consistent lighting conditions
+- Regular mechanical maintenance needed for the CNC feeder components
+
+---
+
+## 📄 IP Status
+
+Patent application in progress for the **novel CNC-driven feeding mechanism with environmental feedback loop**.
+
+---
+
+## 👥 Team — Spatika
+
+| Name | Contact | Department |
+|---|---|---|
+| Tarun Patil | 8431413296 | ECE, BMSIT&M |
+| Sri Srujan Hari T | 9900960468 | ECE, BMSIT&M |
+| Nitish K S | 8073251956 | ECE, BMSIT&M |
+| Harshitha K V | 9980174654 | ECE, BMSIT&M |
